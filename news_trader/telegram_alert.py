@@ -1,6 +1,10 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-TELEGRAM_TOKEN = "8052139129:AAFAVnV9Xf2wvs3nS3e4zvBUr6WvugNx_58"
+load_dotenv()
+
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
 
 def send_telegram_message(chat_id, message):
@@ -18,7 +22,7 @@ def send_telegram_message(chat_id, message):
         print(f"[텔레그램] 메시지 전송 중 오류 발생: {e}")
 
 if __name__ == "__main__":
-    # 테스트용 chat_id를 입력하세요 (예: 123456789 또는 -1001234567890)
-    chat_id = "8082360458"
+    # 테스트용 chat_id를 환경변수에서 가져오거나 직접 입력
+    chat_id = os.getenv("TELEGRAM_CHAT_ID", "여기에_본인_chat_id_입력")
     message = "텔레그램 메시지 전송 테스트입니다."
     send_telegram_message(chat_id, message) 
